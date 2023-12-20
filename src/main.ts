@@ -9,8 +9,8 @@ Object.assign(window, g)
 
 const Editor: Component = () => {
   return html`<host>
-        <atom-block-editor-root></atom-block-editor-root>
-    </host>`
+    <atom-block-editor-root></atom-block-editor-root>
+  </host>`
 }
 
 const EditorElement = c(Editor)
