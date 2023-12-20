@@ -1,0 +1,10 @@
+node_modules
+
+dist
+lib
+.DS_Store
+.idea
+temp
+
+tsconfig.tsbuildinfo
+tsconfig.*.tsbuildinfo
