@@ -1,8 +1,11 @@
+import type { BlockSpec } from '@blocksuite/block-std'
 import type { SchemaToModel } from '@blocksuite/store'
 import { defineBlockSchema } from '@blocksuite/store'
 import type { Component } from 'atomico'
 import { c, html } from 'atomico'
-import type { BlockSpec } from '@blocksuite/block-std'
+import invariant from 'tiny-invariant'
+import { usePath } from '../../hooks'
+import type { BlockProps } from '../../types'
 
 export const NoteBlockSchema = defineBlockSchema({
   flavour: 'ab:note',
@@ -14,11 +17,14 @@ export const NoteBlockSchema = defineBlockSchema({
 
 export type NoteBlockModel = SchemaToModel<typeof NoteBlockSchema>
 
-export const NoteBlockComponent: Component<{ content: string[], model: NoteBlockModel }> = ({ content }) => {
-  return html`<host>${content}</host>`
+export const NoteBlockComponent: Component<BlockProps<NoteBlockModel>> = ({ content, model }) => {
+  const path = usePath()
+  invariant(model)
+  return html`<host data-ab-block=${model.id} path=${path}>${content}</host>`
 }
 NoteBlockComponent.props = {
   content: Array,
+  path: Array,
   model: Object,
 }
 

@@ -1,9 +1,9 @@
 import type { Component } from 'atomico'
 import { c, html, useEffect, useHost, useState } from 'atomico'
-import { getStd, page } from './global.ts'
-import { renderPage } from './render.ts'
-import { setup } from './setup.ts'
-import { bindSelection } from './selection.ts'
+import { getStd, page } from './global'
+import { renderPage } from './render'
+import { setup } from './setup'
+import { bindSelection } from './selection'
 
 export const Root: Component = () => {
   const host = useHost()
@@ -22,13 +22,11 @@ export const Root: Component = () => {
     }
   }, [])
 
-  return html`<host>
-    <div contenteditable="true">
+  return html`<host contenteditable="true">
     ${loaded
       ? renderPage(page)
       : html`<span>Loading...</span>`
     }
-    </div>
   </host>`
 }
 

@@ -1,9 +1,10 @@
 import { internalPrimitives } from '@blocksuite/store'
 import { BlockStdScope } from '@blocksuite/block-std'
-import { page, setStd, workspace } from './global.ts'
-import { specs } from './blocks'
+import { page, setStd, workspace } from '../global'
+import { specs } from '../blocks'
+import { regsiterView } from './view'
 
-export async function setup(host: HTMLElement) {
+function setupStd(host: HTMLElement) {
   const std = new BlockStdScope({
     host,
     workspace,
@@ -11,9 +12,9 @@ export async function setup(host: HTMLElement) {
   })
   std.spec.applySpecs(specs)
   setStd(std)
+}
 
-  await page.load()
-
+function initData() {
   const docId = page.addBlock('ab:doc')
   const noteId = page.addBlock('ab:note', {}, docId)
   page.addBlock('ab:paragraph', {
@@ -28,4 +29,14 @@ export async function setup(host: HTMLElement) {
   page.addBlock('ab:paragraph', {
     text: internalPrimitives.Text('I get lost, I freak out'),
   }, noteId)
+}
+
+export async function setup(host: HTMLElement) {
+  setupStd(host)
+
+  regsiterView()
+
+  await page.load()
+
+  initData()
 }

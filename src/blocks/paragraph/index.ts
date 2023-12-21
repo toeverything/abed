@@ -5,6 +5,8 @@ import { c, html, useEffect, useRef } from 'atomico'
 import type { BlockSpec } from '@blocksuite/block-std'
 import { InlineEditor } from '@blocksuite/inline'
 import invariant from 'tiny-invariant'
+import { usePath } from '../../hooks'
+import type { BlockProps } from '../../types'
 
 export const ParagraphBlockSchema = defineBlockSchema({
   flavour: 'ab:paragraph',
@@ -21,10 +23,11 @@ export const ParagraphBlockSchema = defineBlockSchema({
 
 export type ParagraphBlockModel = SchemaToModel<typeof ParagraphBlockSchema>
 
-export const ParagraphBlockComponent: Component<{ content: string[], model: ParagraphBlockModel }> = ({
+export const ParagraphBlockComponent: Component<BlockProps<ParagraphBlockModel>> = ({
   content,
   model,
 }) => {
+  const path = usePath()
   const ref = useRef<HTMLDivElement>()
   useEffect(() => {
     invariant(model, 'Model is not found')
@@ -35,13 +38,16 @@ export const ParagraphBlockComponent: Component<{ content: string[], model: Para
       editor.unmount()
     }
   }, [])
-  return html`<host>
+  invariant(model)
+
+  return html`<host data-ab-block=${model.id} path=${path}>
     <div ref=${ref}></div>
     ${content}
   </host>`
 }
 ParagraphBlockComponent.props = {
   content: Array,
+  path: Array,
   model: Object,
 }
 

@@ -1,7 +1,7 @@
 import type { BaseBlockModel, Page } from '@blocksuite/store'
 import invariant from 'tiny-invariant'
 import { html } from 'atomico'
-import { getStd } from './global.ts'
+import { getStd } from './global'
 
 export function renderPage(page: Page) {
   const { root } = page
