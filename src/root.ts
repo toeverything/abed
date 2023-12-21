@@ -3,27 +3,32 @@ import { c, html, useEffect, useHost, useState } from 'atomico'
 import { getStd, page } from './global.ts'
 import { renderPage } from './render.ts'
 import { setup } from './setup.ts'
+import { bindSelection } from './selection.ts'
 
 export const Root: Component = () => {
   const host = useHost()
   const [loaded, setLoaded] = useState(false)
+
   useEffect(() => {
-    setup(host.current).then(() => {
+    const $host = host.current
+    setup($host).then(() => {
       getStd().mount()
       setLoaded(true)
     })
+    const unbind = bindSelection()
     return () => {
+      unbind()
       getStd().unmount()
     }
   }, [])
 
   return html`<host>
-      ${loaded
-          ? html`<div contenteditable="true">
-              ${renderPage(page)}
-            </div>`
-          : html`<span>Loading...</span>`
+    <div contenteditable="true">
+    ${loaded
+      ? renderPage(page)
+      : html`<span>Loading...</span>`
     }
+    </div>
   </host>`
 }
 

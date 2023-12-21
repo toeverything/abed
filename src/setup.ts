@@ -3,7 +3,7 @@ import { BlockStdScope } from '@blocksuite/block-std'
 import { page, setStd, workspace } from './global.ts'
 import { specs } from './blocks'
 
-export function setup(host: HTMLElement) {
+export async function setup(host: HTMLElement) {
   const std = new BlockStdScope({
     host,
     workspace,
@@ -11,11 +11,21 @@ export function setup(host: HTMLElement) {
   })
   std.spec.applySpecs(specs)
   setStd(std)
-  return page.load().then(() => {
-    const docId = page.addBlock('ab:doc')
-    const noteId = page.addBlock('ab:note', {}, docId)
-    page.addBlock('ab:paragraph', {
-      text: internalPrimitives.Text('Hello, Atom Block Editor!'),
-    }, noteId)
-  })
+
+  await page.load()
+
+  const docId = page.addBlock('ab:doc')
+  const noteId = page.addBlock('ab:note', {}, docId)
+  page.addBlock('ab:paragraph', {
+    text: internalPrimitives.Text('Good morning'),
+  }, noteId)
+  page.addBlock('ab:paragraph', {
+    text: internalPrimitives.Text('Show me the place where he inserted the blade'),
+  }, noteId)
+  page.addBlock('ab:paragraph', {
+    text: internalPrimitives.Text('Or praise the Lord, burn my house'),
+  }, noteId)
+  page.addBlock('ab:paragraph', {
+    text: internalPrimitives.Text('I get lost, I freak out'),
+  }, noteId)
 }
