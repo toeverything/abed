@@ -1,42 +1,36 @@
-import { internalPrimitives } from '@blocksuite/store'
+import { Generator, Schema, Workspace, createMemoryStorage } from '@blocksuite/store'
+import { createBroadcastChannelProvider } from '@blocksuite/store/providers/broadcast-channel'
 import { BlockStdScope } from '@blocksuite/block-std'
-import { page, setStd, workspace } from '../global'
-import { specs } from '../blocks'
-import { regsiterView } from './view'
+import { getStd, setStd } from '../global'
+import { schemas, specs } from '../blocks'
+import { registerView } from './view'
 
-function setupStd(host: HTMLElement) {
+function setupStd(editorId: string, host: HTMLElement) {
+  const schema = new Schema()
+  schema.register(schemas)
+  const workspace = new Workspace({
+    id: editorId,
+    schema,
+    providerCreators: [createBroadcastChannelProvider],
+    idGenerator: Generator.NanoID,
+    blobStorages: [createMemoryStorage],
+  })
+  const page = workspace.createPage({ id: 'home' })
   const std = new BlockStdScope({
     host,
     workspace,
     page,
   })
   std.spec.applySpecs(specs)
-  setStd(std)
+  setStd(editorId, std)
 }
 
-function initData() {
-  const docId = page.addBlock('ab:doc')
-  const noteId = page.addBlock('ab:note', {}, docId)
-  page.addBlock('ab:paragraph', {
-    text: internalPrimitives.Text('Good morning'),
-  }, noteId)
-  page.addBlock('ab:paragraph', {
-    text: internalPrimitives.Text('Show me the place where he inserted the blade'),
-  }, noteId)
-  page.addBlock('ab:paragraph', {
-    text: internalPrimitives.Text('Or praise the Lord, burn my house'),
-  }, noteId)
-  page.addBlock('ab:paragraph', {
-    text: internalPrimitives.Text('I get lost, I freak out'),
-  }, noteId)
-}
+export async function setup(editorId: string, host: HTMLElement) {
+  setupStd(editorId, host)
 
-export async function setup(host: HTMLElement) {
-  setupStd(host)
+  registerView(editorId)
 
-  regsiterView()
-
+  const std = getStd(editorId)
+  const page = std.page
   await page.load()
-
-  initData()
 }

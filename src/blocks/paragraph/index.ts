@@ -24,10 +24,12 @@ export const ParagraphBlockSchema = defineBlockSchema({
 export type ParagraphBlockModel = SchemaToModel<typeof ParagraphBlockSchema>
 
 export const ParagraphBlockComponent: Component<BlockProps<ParagraphBlockModel>> = ({
+  editorId,
   content,
   model,
 }) => {
-  const path = usePath()
+  invariant(editorId)
+  const path = usePath(editorId)
   const ref = useRef<HTMLDivElement>()
   useEffect(() => {
     invariant(model, 'Model is not found')
@@ -46,6 +48,7 @@ export const ParagraphBlockComponent: Component<BlockProps<ParagraphBlockModel>>
   </host>`
 }
 ParagraphBlockComponent.props = {
+  editorId: String,
   content: Array,
   path: Array,
   model: Object,

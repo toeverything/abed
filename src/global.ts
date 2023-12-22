@@ -1,6 +1,5 @@
-import { Generator, Schema, Workspace, createMemoryStorage } from '@blocksuite/store'
-import { createBroadcastChannelProvider } from '@blocksuite/store/providers/broadcast-channel'
 import type { BlockStdScope } from '@blocksuite/block-std'
+import { Schema } from '@blocksuite/store'
 import invariant from 'tiny-invariant'
 import { schemas } from './blocks'
 
@@ -8,22 +7,14 @@ export const id = crypto.randomUUID()
 export const schema = new Schema()
 schema.register(schemas)
 
-export const workspace = new Workspace({
-  id,
-  schema,
-  providerCreators: [createBroadcastChannelProvider],
-  idGenerator: Generator.NanoID,
-  blobStorages: [createMemoryStorage],
-})
-export const page = workspace.createPage({ id: 'home' })
+const _stdMap: Map<string, BlockStdScope> = new Map()
 
-let _std: BlockStdScope | null = null
-
-export function setStd(std: BlockStdScope) {
-  _std = std
+export function setStd(editorId: string, std: BlockStdScope) {
+  _stdMap.set(editorId, std)
 }
 
-export function getStd() {
+export function getStd(editorId: string) {
+  const _std = _stdMap.get(editorId)
   invariant(_std, 'Std is not ready')
   return _std
 }

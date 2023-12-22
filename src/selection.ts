@@ -1,7 +1,7 @@
 import { getStd } from './global'
 
-export function bindSelection() {
-  const std = getStd()
+export function bindSelection(editorId: string) {
+  const std = getStd(editorId)
   const onSelectionChange = () => {
     const selection = document.getSelection()
     if (!selection) {

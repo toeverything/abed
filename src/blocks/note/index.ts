@@ -17,12 +17,14 @@ export const NoteBlockSchema = defineBlockSchema({
 
 export type NoteBlockModel = SchemaToModel<typeof NoteBlockSchema>
 
-export const NoteBlockComponent: Component<BlockProps<NoteBlockModel>> = ({ content, model }) => {
-  const path = usePath()
+export const NoteBlockComponent: Component<BlockProps<NoteBlockModel>> = ({ editorId, content, model }) => {
+  invariant(editorId)
+  const path = usePath(editorId)
   invariant(model)
   return html`<host data-ab-block=${model.id} path=${path}>${content}</host>`
 }
 NoteBlockComponent.props = {
+  editorId: String,
   content: Array,
   path: Array,
   model: Object,

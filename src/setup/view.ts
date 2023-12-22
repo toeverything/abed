@@ -52,10 +52,10 @@ function getChildren(
   )
 }
 
-export function regsiterView() {
+export function registerView(editorId: string) {
   const blockSelector = 'data-ab-block'
   const widgetSelector = 'data-ab-widget'
-  const std = getStd()
+  const std = getStd(editorId)
 
   std.view.register<'block'>({
     type: 'block',

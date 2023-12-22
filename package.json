@@ -8,9 +8,11 @@
     "build": "tsc && vite build",
     "preview": "vite preview",
     "lint": "eslint .",
-    "lint:fix": "eslint . --fix"
+    "lint:fix": "eslint . --fix",
+    "tsc": "tsc --noEmit"
   },
   "dependencies": {
+    "@atomico/hooks": "^3.50.3",
     "@blocksuite/block-std": "nightly",
     "@blocksuite/inline": "nightly",
     "@blocksuite/store": "nightly",

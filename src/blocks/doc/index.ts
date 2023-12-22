@@ -17,8 +17,9 @@ export const DocBlockSchema = defineBlockSchema({
 
 export type DocBlockModel = SchemaToModel<typeof DocBlockSchema>
 
-export const DocBlockComponent: Component<BlockProps<DocBlockModel>> = ({ content, model }) => {
-  const path = usePath()
+export const DocBlockComponent: Component<BlockProps<DocBlockModel>> = ({ editorId, content, model }) => {
+  invariant(editorId)
+  const path = usePath(editorId)
 
   invariant(model)
   return html`<host data-ab-block=${model.id} path=${path}>
@@ -26,6 +27,7 @@ export const DocBlockComponent: Component<BlockProps<DocBlockModel>> = ({ conten
   </host>`
 }
 DocBlockComponent.props = {
+  editorId: String,
   content: Array,
   path: Array,
   model: Object,
