@@ -7,6 +7,7 @@ import { InlineEditor } from '@blocksuite/inline'
 import invariant from 'tiny-invariant'
 import { usePath } from '../../hooks'
 import type { BlockProps } from '../../types'
+import { useRoot } from '../../hooks/use-root'
 
 export const ParagraphBlockSchema = defineBlockSchema({
   flavour: 'ab:paragraph',
@@ -30,16 +31,20 @@ export const ParagraphBlockComponent: Component<BlockProps<ParagraphBlockModel>>
 }) => {
   invariant(editorId)
   const path = usePath(editorId)
+  const root = useRoot()
   const ref = useRef<HTMLDivElement>()
   useEffect(() => {
+    if (!root)
+      return
+
     invariant(model, 'Model is not found')
     invariant(ref.current)
     const editor = new InlineEditor(model.text.yText)
-    editor.mount(ref.current)
+    editor.mount(ref.current, root)
     return () => {
       editor.unmount()
     }
-  }, [])
+  }, [root])
   invariant(model)
 
   return html`<host data-ab-block=${model.id} path=${path}>
