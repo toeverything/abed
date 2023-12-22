@@ -1,4 +1,3 @@
-import type { BlockSuiteViewSpec } from '@blocksuite/block-std'
 import invariant from 'tiny-invariant'
 import { getStd } from '../global'
 import type { BlockElement, WidgetElement } from '../types'
@@ -92,10 +91,6 @@ declare global {
     interface NodeViewType {
       block: BlockElement
       widget: WidgetElement
-    }
-    interface View {
-      block: BlockSuiteViewSpec<BlockElement>
-      widget: BlockSuiteViewSpec<WidgetElement>
     }
   }
 }
