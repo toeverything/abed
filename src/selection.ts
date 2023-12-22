@@ -78,12 +78,12 @@ export function bindSelection(editorId: string) {
     }
 
     const textSelection = rangeToTextSelection(std, selection)
-    if (textSelection)
-      std.selection.set([textSelection])
-    else
+    if (!textSelection) {
       std.selection.clear()
+      return
+    }
 
-    return true
+    std.selection.set([textSelection])
   }
   const unbindSelectionChange = std.event.add('selectionChange', onSelectionChange)
 
@@ -132,34 +132,28 @@ export function bindSelection(editorId: string) {
       if (!anchorRange || !focusRange)
         return
 
-      const selection = document.getSelection()
-      if (!selection)
-        return
       const range = document.createRange()
       range.setStart(anchorRange.startContainer, anchorRange.startOffset)
       range.setEnd(focusRange.endContainer, focusRange.endOffset)
 
       selection.removeAllRanges()
       selection.addRange(range)
+      return
     }
-    else {
-      const inlineRange = fromInlineRoot.inlineEditor.toDomRange({
-        index: textSelection.from.index,
-        length: textSelection.from.length,
-      })
-      if (!inlineRange)
-        return
 
-      const selection = document.getSelection()
-      if (!selection)
-        return
-      const range = document.createRange()
-      range.setStart(inlineRange.startContainer, inlineRange.startOffset)
-      range.setEnd(inlineRange.endContainer, inlineRange.endOffset)
+    const inlineRange = fromInlineRoot.inlineEditor.toDomRange({
+      index: textSelection.from.index,
+      length: textSelection.from.length,
+    })
+    if (!inlineRange)
+      return
 
-      selection.removeAllRanges()
-      selection.addRange(range)
-    }
+    const range = document.createRange()
+    range.setStart(inlineRange.startContainer, inlineRange.startOffset)
+    range.setEnd(inlineRange.endContainer, inlineRange.endOffset)
+
+    selection.removeAllRanges()
+    selection.addRange(range)
   }
   const stdSelectionChangeDispose = std.selection.slots.changed.on(onStdSelectionChange)
 
