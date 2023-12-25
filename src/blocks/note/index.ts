@@ -6,6 +6,8 @@ import { c, html } from 'atomico'
 import invariant from 'tiny-invariant'
 import { usePath } from '../../hooks'
 import type { BlockProps } from '../../types'
+import { useModelUpdate } from '../../hooks/use-model-update'
+import { renderChildren } from '../../render'
 
 export const NoteBlockSchema = defineBlockSchema({
   flavour: 'ab:note',
@@ -17,15 +19,17 @@ export const NoteBlockSchema = defineBlockSchema({
 
 export type NoteBlockModel = SchemaToModel<typeof NoteBlockSchema>
 
-export const NoteBlockComponent: Component<BlockProps<NoteBlockModel>> = ({ editorId, content, model }) => {
+export const NoteBlockComponent: Component<BlockProps<NoteBlockModel>> = ({ editorId, model }) => {
   invariant(editorId)
   const path = usePath(editorId)
+
   invariant(model)
-  return html`<host data-ab-block=${model.id} path=${path}>${content}</host>`
+  useModelUpdate(model)
+
+  return html`<host data-ab-block=${model.id} path=${path}>${renderChildren(editorId, model)}</host>`
 }
 NoteBlockComponent.props = {
   editorId: String,
-  content: Array,
   path: Array,
   model: Object,
 }

@@ -6,6 +6,8 @@ import { c, html } from 'atomico'
 import invariant from 'tiny-invariant'
 import { usePath } from '../../hooks'
 import type { BlockProps } from '../../types'
+import { useModelUpdate } from '../../hooks/use-model-update'
+import { renderChildren } from '../../render'
 
 export const DocBlockSchema = defineBlockSchema({
   flavour: 'ab:doc',
@@ -17,18 +19,19 @@ export const DocBlockSchema = defineBlockSchema({
 
 export type DocBlockModel = SchemaToModel<typeof DocBlockSchema>
 
-export const DocBlockComponent: Component<BlockProps<DocBlockModel>> = ({ editorId, content, model }) => {
+export const DocBlockComponent: Component<BlockProps<DocBlockModel>> = ({ editorId, model }) => {
   invariant(editorId)
   const path = usePath(editorId)
 
   invariant(model)
+  useModelUpdate(model)
+
   return html`<host data-ab-block=${model.id} path=${path}>
-    ${content}
+    ${renderChildren(editorId, model)}
   </host>`
 }
 DocBlockComponent.props = {
   editorId: String,
-  content: Array,
   path: Array,
   model: Object,
 }

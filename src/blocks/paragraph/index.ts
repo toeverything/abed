@@ -8,6 +8,8 @@ import invariant from 'tiny-invariant'
 import { usePath } from '../../hooks'
 import type { BlockProps } from '../../types'
 import { useRoot } from '../../hooks/use-root'
+import { useModelUpdate } from '../../hooks/use-model-update'
+import { renderChildren } from '../../render'
 
 export const ParagraphBlockSchema = defineBlockSchema({
   flavour: 'ab:paragraph',
@@ -26,7 +28,6 @@ export type ParagraphBlockModel = SchemaToModel<typeof ParagraphBlockSchema>
 
 export const ParagraphBlockComponent: Component<BlockProps<ParagraphBlockModel>> = ({
   editorId,
-  content,
   model,
 }) => {
   invariant(editorId)
@@ -45,16 +46,17 @@ export const ParagraphBlockComponent: Component<BlockProps<ParagraphBlockModel>>
       editor.unmount()
     }
   }, [root])
+
   invariant(model)
+  useModelUpdate(model)
 
   return html`<host data-ab-block=${model.id} path=${path}>
     <div ref=${ref}></div>
-    ${content}
+    ${renderChildren(editorId, model)}
   </host>`
 }
 ParagraphBlockComponent.props = {
   editorId: String,
-  content: Array,
   path: Array,
   model: Object,
 }

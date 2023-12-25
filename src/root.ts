@@ -5,7 +5,7 @@ import type { BlockStdScope } from '@blocksuite/block-std'
 import { getStd } from './global'
 import { renderPage } from './render'
 import { setup } from './setup'
-import { bindSelection } from './selection'
+import { bindSelection } from './core/selection'
 
 export interface RootProps {
   editorId: string

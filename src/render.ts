@@ -12,11 +12,14 @@ export function renderPage(editorId: string) {
   return renderModel(editorId, root)
 }
 
+export function renderChildren(editorId: string, model: BaseBlockModel) {
+  return model.children.map(child => renderModel(editorId, child))
+}
+
 function renderModel(editorId: string, model: BaseBlockModel): string {
   const std = getStd(editorId)
   const view = std.spec.getView(model.flavour)
   invariant(view, `View for ${model.flavour} is not found`)
   const tag = view.component
-  const content = model.children.map(child => renderModel(editorId, child))
-  return html`<${tag} editorId=${editorId} content=${content} model=${model}></${tag}>`
+  return html`<${tag} key=${model.id} editorId=${editorId} model=${model}></${tag}>`
 }

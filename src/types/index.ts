@@ -3,7 +3,6 @@ import type { AtomicoThis } from 'atomico/types/dom'
 
 export type BlockProps<Model extends BaseBlockModel = BaseBlockModel, Rest extends object = object> = Rest & {
   editorId: string
-  content: string[]
   model: Model
   path: string[]
 }
