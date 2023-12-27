@@ -49,7 +49,7 @@ export function rangeToTextSelection(std: BlockStdScope, selection: Selection): 
   if (!firstInlineRange)
     return null
 
-  return std.selection.getInstance('text', {
+  return std.selection.create('text', {
     from: {
       path: firstBlock.path,
       index: firstInlineRange.index,

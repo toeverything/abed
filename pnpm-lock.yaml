@@ -9,14 +9,14 @@ dependencies:
     specifier: ^3.50.3
     version: 3.50.3(@atomico/channel@0.0.1)(@uppercod/exp-route@1.3.0)(@uppercod/form-tools@0.0.0)(@uppercod/hash@1.1.1)(@uppercod/match-media@1.1.1)(atomico@1.75.1)
   '@blocksuite/block-std':
-    specifier: 0.11.0-nightly-202312261506-3fb9bcb
-    version: 0.11.0-nightly-202312261506-3fb9bcb(@blocksuite/store@0.11.0-nightly-202312261506-3fb9bcb)
+    specifier: 0.11.0-nightly-202312270506-f0bc780
+    version: 0.11.0-nightly-202312270506-f0bc780(@blocksuite/store@0.11.0-nightly-202312270506-f0bc780)
   '@blocksuite/inline':
-    specifier: 0.11.0-nightly-202312261506-3fb9bcb
-    version: 0.11.0-nightly-202312261506-3fb9bcb(lit@3.1.0)(yjs@13.6.10)
+    specifier: 0.11.0-nightly-202312270506-f0bc780
+    version: 0.11.0-nightly-202312270506-f0bc780(lit@3.1.0)(yjs@13.6.10)
   '@blocksuite/store':
-    specifier: 0.11.0-nightly-202312261506-3fb9bcb
-    version: 0.11.0-nightly-202312261506-3fb9bcb(async-call-rpc@6.3.1)(lit@3.1.0)(yjs@13.6.10)
+    specifier: 0.11.0-nightly-202312270506-f0bc780
+    version: 0.11.0-nightly-202312270506-f0bc780(async-call-rpc@6.3.1)(lit@3.1.0)(yjs@13.6.10)
   atomico:
     specifier: ^1.75.1
     version: 1.75.1
@@ -206,44 +206,44 @@ packages:
       to-fast-properties: 2.0.0
     dev: true
 
-  /@blocksuite/block-std@0.11.0-nightly-202312261506-3fb9bcb(@blocksuite/store@0.11.0-nightly-202312261506-3fb9bcb):
-    resolution: {integrity: sha512-iDoIjuuicGxZbw2fSVMlORQQjHoLG7dfqzlElYtqjCmht0PlTTwjYroIP2VdSz5Uvbu2/4jGyiJwjzDN9ElkCQ==}
+  /@blocksuite/block-std@0.11.0-nightly-202312270506-f0bc780(@blocksuite/store@0.11.0-nightly-202312270506-f0bc780):
+    resolution: {integrity: sha512-q/QkCAhG1F8JlPr0Fw8BmTvqToG0PAXTvfwpRAHtM479wEYTtnnm074X9o8l2TPp4ulxT1EBI6nPykq30FFMUg==}
     peerDependencies:
-      '@blocksuite/store': 0.11.0-nightly-202312261506-3fb9bcb
+      '@blocksuite/store': 0.11.0-nightly-202312270506-f0bc780
     dependencies:
-      '@blocksuite/global': 0.11.0-nightly-202312261506-3fb9bcb
-      '@blocksuite/store': 0.11.0-nightly-202312261506-3fb9bcb(async-call-rpc@6.3.1)(lit@3.1.0)(yjs@13.6.10)
+      '@blocksuite/global': 0.11.0-nightly-202312270506-f0bc780
+      '@blocksuite/store': 0.11.0-nightly-202312270506-f0bc780(async-call-rpc@6.3.1)(lit@3.1.0)(yjs@13.6.10)
       lz-string: 1.5.0
       w3c-keyname: 2.2.8
       zod: 3.22.4
     dev: false
 
-  /@blocksuite/global@0.11.0-nightly-202312261506-3fb9bcb:
-    resolution: {integrity: sha512-PyNd4EgtmtXH4LWZwxoYTAkRBnk9OKNcdgJsD5ishTqDo+9XgmNAQ+t56UDu6w6xQj+p9JH3f44+zv1IsHzMgg==}
+  /@blocksuite/global@0.11.0-nightly-202312270506-f0bc780:
+    resolution: {integrity: sha512-1QFVG2dwcB1eev4471sG0/suHzAC2uKgTT86rmsfyZXmPF6rrSLWaMZPif+SsHxUbX9cwGEwp/HNqIcU1/OxKw==}
     dependencies:
       zod: 3.22.4
     dev: false
 
-  /@blocksuite/inline@0.11.0-nightly-202312261506-3fb9bcb(lit@3.1.0)(yjs@13.6.10):
-    resolution: {integrity: sha512-/TjU2a6nCuix5ZUE9IQjzBUQZhMn72DcMH4Vue7kPyKsiS0tVYToqt1cg/U3pspDIzyi0sm4isglJMSCxLIcAw==}
+  /@blocksuite/inline@0.11.0-nightly-202312270506-f0bc780(lit@3.1.0)(yjs@13.6.10):
+    resolution: {integrity: sha512-V0ynoEStMxVmxI0PA3jxF9yrs3WR28aUqq5gTaum3iBbFee57k2wlO2XJgHKeO0HTcvTLNPTqvs2bxDQbGJqCg==}
     peerDependencies:
       lit: ^3.0.2
       yjs: ^13
     dependencies:
-      '@blocksuite/global': 0.11.0-nightly-202312261506-3fb9bcb
+      '@blocksuite/global': 0.11.0-nightly-202312270506-f0bc780
       lit: 3.1.0
       yjs: 13.6.10
       zod: 3.22.4
     dev: false
 
-  /@blocksuite/store@0.11.0-nightly-202312261506-3fb9bcb(async-call-rpc@6.3.1)(lit@3.1.0)(yjs@13.6.10):
-    resolution: {integrity: sha512-QJa2tcVitFx9xW3gyFgfK2LYghdnDLhjpCq5FiYtAq4elHBPht6GwA11afo0lV1EP1cXJjGAi6s3ksHd5XHB2Q==}
+  /@blocksuite/store@0.11.0-nightly-202312270506-f0bc780(async-call-rpc@6.3.1)(lit@3.1.0)(yjs@13.6.10):
+    resolution: {integrity: sha512-mjejkCz+ULaGoWJeRhUAZpEJAPBbdP9vMmyHh00jZFPQZmcyIfKIOMG8n07rAM9TjhJLuLWMoF00QTZ6jq4/5w==}
     peerDependencies:
       async-call-rpc: ^6
       yjs: ^13
     dependencies:
-      '@blocksuite/global': 0.11.0-nightly-202312261506-3fb9bcb
-      '@blocksuite/inline': 0.11.0-nightly-202312261506-3fb9bcb(lit@3.1.0)(yjs@13.6.10)
+      '@blocksuite/global': 0.11.0-nightly-202312270506-f0bc780
+      '@blocksuite/inline': 0.11.0-nightly-202312270506-f0bc780(lit@3.1.0)(yjs@13.6.10)
       '@types/flexsearch': 0.7.6
       async-call-rpc: 6.3.1
       flexsearch: 0.7.21
