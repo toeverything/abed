@@ -29,6 +29,16 @@ export const Root: Component<RootProps> = ({ editorId, config }) => {
       std.mount()
       setStd(std)
       setLoaded(true)
+      std.event.bindHotkey({
+        'Mod-z': (context) => {
+          context.get('defaultState').event.preventDefault()
+          std.page.undo()
+        },
+        'Mod-Z': (context) => {
+          context.get('defaultState').event.preventDefault()
+          std.page.redo()
+        },
+      })
     })
     const unbind = bindSelection(editorId)
     return () => {
